@@ -30,3 +30,7 @@ jobs:
       - name: Run unit tests
         run: |
           PYTHONPATH=$PYTHONPATH:. python -m unittest discover tests
+      
+      - name: Send notifications on failure
+      if: failure()
+      run: echo "Build failed."
