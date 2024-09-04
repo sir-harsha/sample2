@@ -26,11 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Adjust PYTHONPATH to include the directory containing addi.py
       - name: Run unit tests
         run: |
-          set PYTHONPATH=%PYTHONPATH%;. 
+          $env:PYTHONPATH = "$env:PYTHONPATH;."
           python -m unittest discover tests
+        shell: powershell
       
       - name: Send notifications on failure
         if: failure()
