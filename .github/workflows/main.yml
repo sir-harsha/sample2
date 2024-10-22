@@ -1,37 +1,38 @@
-name: CI Workflow for Calci App
+name: CI workflow for calci app
 
-on:
+on: 
   push:
     branches:
-      - main
+     - main
   pull_request:
     branches:
       - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: windows-latest
-
+   
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Python
+    
+      - name: Setup
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+         py -m pip install --upgrade pip
+         pip install -r requirements.txt
 
       - name: Run unit tests
         run: |
-          $env:PYTHONPATH = "$env:PYTHONPATH;."
-          python -m unittest discover tests
+         $env:PYTHONPATH = "$env:PYTHONPATH;."
+         py -m unittests discover tests
         shell: powershell
       
       - name: Send notifications on failure
         if: failure()
-        run: echo "Build failed."
+        run : echo "Build failure"
+
