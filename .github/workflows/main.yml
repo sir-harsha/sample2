@@ -29,7 +29,7 @@ jobs:
       - name: Run unit tests
         run: |
          $env:PYTHONPATH = "$env:PYTHONPATH;."
-         py -m unittests discover tests
+         py -m unittest discover tests
         shell: powershell
       
       - name: Send notifications on failure
